@@ -1,0 +1,8 @@
+- hosts: all 
+  tasks:
+  - name: grouping host by distribution
+    group_by: 
+      key: srv_{{ansible_distribution}}
+  - name: show hosts in dynamic inventory 
+    debug:
+      var: groups
