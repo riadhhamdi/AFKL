@@ -3,6 +3,9 @@
   - name: grouping host by distribution
     group_by: 
       key: srv_{{ansible_distribution}}
+  - name: get server group by environmet 
+    group_by:
+      key: srv_{{ansible_local.custom.general.environment}}
   - name: show hosts in dynamic inventory 
     debug:
       var: groups
