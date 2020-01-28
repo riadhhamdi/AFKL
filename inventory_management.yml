@@ -17,7 +17,7 @@
 
   - name: Setting environment fact 
     set_fact: 
-       inv_env: "{{ lookup('vars', 'groups["env_' + env + '"]') }}"
+       inv_env: "{{ lookup("vars", "groups['env_" + env + "']") }}"
     when: env != 'all'
   - name: Setting environment fact 
     set_fact: 
