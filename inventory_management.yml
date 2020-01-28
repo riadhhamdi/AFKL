@@ -42,7 +42,7 @@
       var: host_pat 
     
 ### Showing the list of hosts 
-- hosts: "{{host_pat}}"
+- hosts: '{{host_pat}}'
   tasks:
   - name: Show the hosts list  
     debug: 
