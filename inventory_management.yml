@@ -17,38 +17,20 @@
 
   - name: Setting environment fact 
     set_fact: 
-       inv_env: "env_{{env}}"
+       inv_env: "{{ lookup('vars', 'groups["env_' + {{env}} + '"]') }}"
     when: env != 'all'
-    
-    
-  - name: Setting srv fact 
+  - name: Setting environment fact 
     set_fact: 
-       inv_srv: "srv_{{srv}}"
-    when: srv != 'all'
-    
-    
-  - name: Setting appl fact 
-    set_fact: 
-       inv_app: "app_{{app}}"
-    when: app != 'all'
-     
-  - name: Get the new inventory 
-    set_fact: 
-      host_list: "{{groups["{{inv_env}}"] | intersect(groups["{{inv_srv}}"]) | intersect(groups["{{inv_app}}"])}}"
-  - name: Get the new inventory hosts 
-    debug: 
-      var: host_list 
-### Define Host pattern
-  - name: Set Host pattern 
-    set_fact:
-       host_pat: "{{inv_srv | default('all')}},&{{inv_app | | default('all') }},&{{inv_env | default('all')}}"
-  - name: Show the host pattern
-    debug: 
-      var: host_pat 
+       inv_env: "{{groups['all']}}"
+    when: env == 'all'
+  
+  - name: Show variable content 
+    debug:
+      var: inv_env 
     
 ### Showing the list of hosts 
-- hosts: '{{host_pat}}'
-  tasks:
-  - name: Show the hosts list  
-    debug: 
-      msg: "{{ inventory_hostname }}"
+#- hosts: '{{host_pat}}'
+#  tasks:
+#  - name: Show the hosts list  
+#    debug: 
+#      msg: "{{ inventory_hostname }}"
