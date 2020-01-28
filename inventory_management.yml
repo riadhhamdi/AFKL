@@ -6,6 +6,13 @@
   - name: get server group by environmet 
     group_by:
       key: srv_{{ansible_local.custom.general.environment}}
+  - name: get server group by environmet 
+    group_by:
+      key: app_{{ansible_local.custom.general.application}}
   - name: show hosts in dynamic inventory 
     debug:
-      var: groups
+      var: groups     
+- hosts: srv_Centos7,app_tomcat
+  tasks:
+  - name: Ping hosts to check if it works 
+    ping: 
