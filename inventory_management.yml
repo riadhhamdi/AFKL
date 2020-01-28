@@ -17,12 +17,12 @@
 
   - name: Setting environment fact 
     set_fact: 
-       inv_env: "{{lookup('vars', 'groups.env_' + env)}}"
+       inv_env: "{{lookup('dict', 'groups.env_' + env), wantlist=True}}"
     when: env != 'all'
   - name: Setting environment fact 
     set_fact: 
        inv_env: "{{groups.all}}"
-  #  when: env == 'all'
+    when: env == 'all'
   
   - name: Show variable content 
     debug:
