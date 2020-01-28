@@ -1,0 +1,6 @@
+---
+# tasks file for motd
+- copy:
+    dest: /etc/motd 
+    content: "{{motd_content}}"
+ 

@@ -1,0 +1,5 @@
+---
+# tasks file for smoketest
+- copy: 
+    dest: "{{dest_file}}"
+    content: "{{content_file}}"
