@@ -12,7 +12,7 @@
   - name: show hosts in dynamic inventory 
     debug:
       var: groups     
-- hosts: srv_CentOs,app_tomcat
+- hosts: srv_CentOs,&app_tomcat
   tasks:
   - name: Show the hosts list  
     debug: 
