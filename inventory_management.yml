@@ -19,24 +19,25 @@
     set_fact: 
        env: "env_{{env}}"
     when: env != 'all'
-    run_once: yes 
+    
     
   - name: Setting srv fact 
     set_fact: 
        srv: "srv_{{srv}}"
     when: srv != 'all'
-    run_once: yes 
+    
     
   - name: Setting appl fact 
     set_fact: 
        app: "app_{{app}}"
     when: app != 'all'
-    run_once: yes 
+     
 
 ### Define Host pattern
   - name: Set Host pattern 
     set_fact:
        host_pat: "{{srv}},&{{app}},&{{env}}"
+    
 ### Showing the list of hosts 
 - hosts: "{{host_pat}}"
   tasks:
