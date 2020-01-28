@@ -11,12 +11,28 @@
       key: app_{{ansible_local.custom.general.application}}
   - name: show hosts in dynamic inventory 
     debug:
-      var: groups     
+      var: groups  
+      
+### Getting user choices 
+
   - name: Setting environment fact 
     set_fact: 
        env: "env_{{env}}"
     when: env != 'all'
-- hosts: srv_CentOS,&app_tomcat,{{env}}
+    
+  - name: Setting srv fact 
+    set_fact: 
+       env: "srv_{{srv}}"
+    when: srv != 'all'
+    
+  - name: Setting appl fact 
+    set_fact: 
+       env: "app_{{srv}}"
+    when: app != 'all'
+
+
+### Showing the list of hosts 
+- hosts: {{srv}},&{{app}},&{{env}}
   tasks:
   - name: Show the hosts list  
     debug: 
