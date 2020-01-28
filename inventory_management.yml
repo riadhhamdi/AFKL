@@ -37,6 +37,9 @@
   - name: Set Host pattern 
     set_fact:
        host_pat: "{{srv}},&{{app}},&{{env}}"
+  - name: Show the host pattern
+    debug: 
+      var: host_pat 
     
 ### Showing the list of hosts 
 - hosts: "{{host_pat}}"
