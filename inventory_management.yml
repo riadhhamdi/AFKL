@@ -61,7 +61,7 @@
     add_host:
       group: target_hosts
       hostname: "{{item}}"
-    with_item: "{{target_servers}}"
+    with_items: "{{target_servers}}"
     
     
 ### Showing the list of hosts 
