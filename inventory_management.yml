@@ -34,7 +34,7 @@
      
   - name: Get the new inventory 
     set_fact: 
-      host_list: "{{groups['inv_env'] | intersect(groups['inv_srv']) | intersect(groups['inv_app'])}}"
+      host_list: "{{groups["{{inv_env}}"] | intersect(groups["{{inv_srv}}"]) | intersect(groups["{{inv_app}}"])}}"
   - name: Get the new inventory hosts 
     debug: 
       var: host_list 
