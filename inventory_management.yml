@@ -8,31 +8,37 @@
       key: env_{{ansible_local.custom.general.environment}}
   - name: get server group by environmet 
     group_by:
-      key: app_{{ansible_local.custom.general.application}}
-  - name: show hosts in dynamic inventory 
-    debug:
-      var: groups  
+      key: app_{{ansible_local.custom.general.application}}"
+#  - name: show hosts in dynamic inventory 
+#    debug:
+#      var: groups  
       
 ### Getting user choices 
 
   - name: Setting environment fact 
     set_fact: 
-       inv_env: "env_{{env}}"
+       env: "env_{{env}}"
     when: env != 'all'
+    run_once: yes 
     
   - name: Setting srv fact 
     set_fact: 
-       inv_srv: "srv_{{srv}}"
+       srv: "srv_{{srv}}"
     when: srv != 'all'
+    run_once: yes 
     
   - name: Setting appl fact 
     set_fact: 
-       inv_app: "app_{{app}}"
+       app: "app_{{app}}"
     when: app != 'all'
+    run_once: yes 
 
-
+### Define Host pattern
+  - name: Set Host pattern 
+    set_fact:
+       host_pat: "{{srv}},&{{app}},&{{env}}"
 ### Showing the list of hosts 
-- hosts: "{{inv_srv}},&{{inv_app}},&{{inv_env}}"
+- hosts: "{{host_pat}}"
   tasks:
   - name: Show the hosts list  
     debug: 
