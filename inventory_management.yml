@@ -12,11 +12,11 @@
   - name: show hosts in dynamic inventory 
     debug:
       var: groups     
-  #- name: Setting environment fact 
-  #  set_fact: 
-  #     inventory_environment: "{{environment}}"
-  #  when
-- hosts: srv_CentOS,&app_tomcat,&{% if env == all %}all{% else % }env_{{env}}{% endif %}
+  - name: Setting environment fact 
+    set_fact: 
+       env: "env_{{env}}"
+    when: env != 'all'
+- hosts: srv_CentOS,&app_tomcat,{{env}}
   tasks:
   - name: Show the hosts list  
     debug: 
