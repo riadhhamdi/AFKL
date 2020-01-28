@@ -62,3 +62,4 @@
       hostname: "{{item}}"
     with_items: "{{target_servers}}"
   run_once: yes 
+  no_log: yes 
