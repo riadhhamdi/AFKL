@@ -32,7 +32,7 @@
 
 
 ### Showing the list of hosts 
-- hosts: "{{inv_srv | default('all')}},&{{inv_app | default('all')}},&{{inv_env | default('all')}}"
+- hosts: "{{inv_srv}},&{{inv_app}},&{{inv_env}}"
   tasks:
   - name: Show the hosts list  
     debug: 
