@@ -16,7 +16,7 @@
   #  set_fact: 
   #     inventory_environment: "{{environment}}"
   #  when
-- hosts: srv_CentOS,&app_tomcat,'{% if environment == all %} all {% else % } env_{{environment}} {% endif %}'
+- hosts: srv_CentOS,&app_tomcat,&'{% if env == all %}all{% else % }env_{{env}}{% endif %}'
   tasks:
   - name: Show the hosts list  
     debug: 
