@@ -21,7 +21,7 @@
  #   when: env != 'all'
   - name: Setting environment fact 
     set_fact: 
-       inv_env: "{{groups['all']}}"
+       inv_env: "{{groups.all}}"
     when: env == 'all'
   
   - name: Show variable content 
