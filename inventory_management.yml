@@ -51,15 +51,22 @@
 ###Manage List intersection 
   - name: get the desired host list 
     set_fact:
-      target_servers: "{{ inv_env | intersect(inv_app) | intersect(inv_loc) }}"  
+      target_servers: "{{ inv_env | intersect(inv_app) | intersect(inv_loc) | sort }}"  
   - name: show target hosts content 
     debug: 
       var: target_servers 
   
+###Create in memory inventory 
+  - name: Adding to the target inventory 
+    add_host:
+      group: target_hosts
+      hostname: "{{item}}"
+    with_item: "{{target_servers}}"
+    
     
 ### Showing the list of hosts 
-#- hosts: '{{host_pat}}'
-#  tasks:
-#  - name: Show the hosts list  
-#    debug: 
-#      msg: "{{ inventory_hostname }}"
+- hosts: target_hosts
+  tasks:
+  - name: Show the hosts list  
+    debug: 
+      msg: "{{ inventory_hostname }}"
