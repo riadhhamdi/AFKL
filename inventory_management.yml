@@ -12,7 +12,8 @@
   - name: show hosts in dynamic inventory 
     debug:
       var: groups     
-- hosts: srv_Centos7,app_tomcat
+- hosts: srv_Centos,app_tomcat
   tasks:
-  - name: Ping hosts to check if it works 
-    ping: 
+  - name: Show the hosts list  
+    debug: 
+      msg: "{{ inventory_hostname }}"
