@@ -32,7 +32,7 @@
 
 
 ### Showing the list of hosts 
-- hosts: {{srv}},&{{app}},&{{env}}
+- hosts: "{{srv}},&{{app}},&{{env}}"
   tasks:
   - name: Show the hosts list  
     debug: 
