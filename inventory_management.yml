@@ -39,11 +39,11 @@
     when: app == 'all'
     
    ## Filter by location 
-  - name: Setting application host list  
+  - name: Setting location host list  
     set_fact: 
        inv_loc: "{{ groups['loc_' + loc] }}"
     when: loc != 'all'
-  - name: Setting application host list in case of no filter 
+  - name: Setting location host list in case of no filter 
     set_fact: 
        inv_loc: "{{groups.all}}"
     when: loc == 'all'
