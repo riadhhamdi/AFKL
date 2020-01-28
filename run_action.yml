@@ -1,0 +1,8 @@
+- hosts: all 
+  tasks:
+  - name: prepare inventory based on User criteria 
+    include_tasks: detect_target.yml  
+### Showing the list of hosts 
+- hosts: target_hosts
+  roles:
+  - role: {{role_name}}
