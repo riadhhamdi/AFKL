@@ -5,14 +5,18 @@
       key: srv_{{ansible_distribution}}
   - name: get server group by environmet 
     group_by:
-      key: srv_{{ansible_local.custom.general.environment}}
+      key: env_{{ansible_local.custom.general.environment}}
   - name: get server group by environmet 
     group_by:
       key: app_{{ansible_local.custom.general.application}}
   - name: show hosts in dynamic inventory 
     debug:
       var: groups     
-- hosts: srv_CentOS,&app_tomcat
+  #- name: Setting environment fact 
+  #  set_fact: 
+  #     inventory_environment: "{{environment}}"
+  #  when
+- hosts: srv_CentOS,&app_tomcat,'{% if environment == all %} all {% else % } env_{{environment}} {% endif %}'
   tasks:
   - name: Show the hosts list  
     debug: 
