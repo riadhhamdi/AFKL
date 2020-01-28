@@ -9,24 +9,53 @@
   - name: get server group by environmet 
     group_by:
       key: app_{{ansible_local.custom.general.application}}"
+  - name: get server group by environmet 
+    group_by:
+      key: loc_{{ansible_local.custom.general.location}}"
   - name: show hosts in dynamic inventory 
     debug:
       var: groups  
       
 ### Getting user choices 
 
-  - name: Setting environment fact 
+### Create a test for each new filter 
+  ## Filter by environment 
+  - name: Setting environment host list  
     set_fact: 
        inv_env: "{{ groups['env_' + env] }}"
     when: env != 'all'
-  - name: Setting environment fact 
+  - name: Setting environment host list in case of no filter   
     set_fact: 
        inv_env: "{{groups.all}}"
     when: env == 'all'
+  ## Filter by application 
+  - name: Setting application host list  
+    set_fact: 
+       inv_app: "{{ groups['env_' + app] }}"
+    when: app != 'all'
+  - name: Setting application host list in case of no filter 
+    set_fact: 
+       inv_app: "{{groups.all}}"
+    when: app == 'all'
+    
+   ## Filter by location 
+  - name: Setting application host list  
+    set_fact: 
+       inv_loc: "{{ groups['env_' + loc] }}"
+    when: loc != 'all'
+  - name: Setting application host list in case of no filter 
+    set_fact: 
+       inv_loc: "{{groups.all}}"
+    when: loc == 'all'
+   
+###Manage List intersection 
+  - name: get the desired host list 
+    set_fact:
+      target_servers: "{{ inv_env | intersect('inv_app') | intersect('inv_loc') }}"  
+  - name: show target hosts content 
+    debug: 
+      var: target_servers 
   
-  - name: Show variable content 
-    debug:
-      var: inv_env 
     
 ### Showing the list of hosts 
 #- hosts: '{{host_pat}}'
