@@ -31,7 +31,7 @@
   ## Filter by application 
   - name: Setting application host list  
     set_fact: 
-       inv_app: "{{ groups['env_' + app] }}"
+       inv_app: "{{ groups['app_' + app] }}"
     when: app != 'all'
   - name: Setting application host list in case of no filter 
     set_fact: 
@@ -41,7 +41,7 @@
    ## Filter by location 
   - name: Setting application host list  
     set_fact: 
-       inv_loc: "{{ groups['env_' + loc] }}"
+       inv_loc: "{{ groups['loc_' + loc] }}"
     when: loc != 'all'
   - name: Setting application host list in case of no filter 
     set_fact: 
