@@ -11,9 +11,9 @@
   - name: get server group by environmet
     group_by:
       key: loc_{{ansible_local.custom.general.location}}
-#  - name: show hosts in dynamic inventory
-#    debug:
-#      var: groups
+  - name: show hosts in dynamic inventory
+    debug:
+      var: groups
 
 ### Getting user choices 
 
