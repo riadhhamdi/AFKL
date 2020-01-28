@@ -11,9 +11,9 @@
   - name: get server group by environmet
     group_by:
       key: loc_{{ansible_local.custom.general.location}}
-  - name: show hosts in dynamic inventory
-    debug:
-      var: groups
+#  - name: show hosts in dynamic inventory
+#    debug:
+#      var: groups
 
 ### Getting user choices 
 
@@ -51,9 +51,9 @@
   - name: get the desired host list
     set_fact:
       target_servers: "{{ inv_env | intersect(inv_app) | intersect(inv_loc) | sort }}"
-  - name: show target hosts content
-    debug:
-      var: target_servers
+#  - name: show target hosts content
+#    debug:
+#      var: target_servers
 
 ###Create in memory inventory 
   - name: Adding to the target inventory
