@@ -22,12 +22,12 @@
     
   - name: Setting srv fact 
     set_fact: 
-       env: "srv_{{srv}}"
+       srv: "srv_{{srv}}"
     when: srv != 'all'
     
   - name: Setting appl fact 
     set_fact: 
-       env: "app_{{srv}}"
+       app: "app_{{app}}"
     when: app != 'all'
 
 
