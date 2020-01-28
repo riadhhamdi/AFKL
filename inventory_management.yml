@@ -51,7 +51,7 @@
 ###Manage List intersection 
   - name: get the desired host list 
     set_fact:
-      target_servers: "{{ inv_env | intersect('inv_app') | intersect('inv_loc') }}"  
+      target_servers: "{{ inv_env | intersect(inv_app) | intersect(inv_loc) }}"  
   - name: show target hosts content 
     debug: 
       var: target_servers 
