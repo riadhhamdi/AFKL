@@ -17,26 +17,26 @@
 
   - name: Setting environment fact 
     set_fact: 
-       env: "env_{{env}}"
+       inv_env: "env_{{env}}"
     when: env != 'all'
     
     
   - name: Setting srv fact 
     set_fact: 
-       srv: "srv_{{srv}}"
+       inv_srv: "srv_{{srv}}"
     when: srv != 'all'
     
     
   - name: Setting appl fact 
     set_fact: 
-       app: "app_{{app}}"
+       inv_app: "app_{{app}}"
     when: app != 'all'
      
 
 ### Define Host pattern
   - name: Set Host pattern 
     set_fact:
-       host_pat: "{{srv}},&{{app}},&{{env}}"
+       host_pat: "{{inv_srv | default('all')}},&{{inv_app | | default('all') }},&{{inv_env | default('all')}}"
   - name: Show the host pattern
     debug: 
       var: host_pat 
